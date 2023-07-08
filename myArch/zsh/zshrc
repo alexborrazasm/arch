@@ -141,7 +141,7 @@ alias matlab="matlab -nodesktop"
 alias maxima="rlwrap maxima"
 
 #qtile
-alias qtile_conf="cp -f Documents/GitHUB/myArch/qtile/config.py .config/qtile && cp -f Documents/GitHUB/myArch/qtile/autostart.sh .config/qtile/"
+alias qtile_conf="cp -f Documents/Repos/arch/myArch/qtile/config.py .config/qtile && cp -f Documents/GitHUB/myArch/qtile/autostart.sh .config/qtile/"
 alias qtile_reload="qtile cmd-obj -o cmd -f restart"
 alias qtile_check="qtile check"
 alias qtile_wall="feh --bg-fill "/home/BM4lex/.config/qtile/wallpaper.png""
