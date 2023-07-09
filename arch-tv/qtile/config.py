@@ -20,15 +20,18 @@ mod = "mod4"
 terminal = guess_terminal("kitty")
 
 #functions
-def round_edges(color,pos): #rounds the edges
-    if pos == 0:
-        icon=""
+def get_border(select,icon_color,back_color): #rounds the edges
+    if select==1:
+        icon=""
+        size=size_bar*1.4
     else:
-        icon=""
+        icon=""
+        size=size_bar*1.2
     return widget.TextBox(
         text=icon,
-        fontsize=size_bar,
-        foreground=color,
+        fontsize=size,
+        foreground=icon_color,
+        background=back_color,
         padding=-3,
     )
 
@@ -121,7 +124,7 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 screens = [
-    #hdmi1
+    #built-in screen
     Screen(
         top=bar.Bar(
             [   
@@ -135,37 +138,40 @@ screens = [
                     highlight_method="line",
                     highlight_color=[color_background, color_background],
                     this_current_screen_border=color_arch,
-                    visible_groups=["Net","Dev","Term","Med"],
+                    visible_groups=["Net","Dev","Term","Med","Soc"],
                 ),
                 widget.WindowName(),
-                widget.TextBox(" ", width=10),
-                    round_edges(color_cpu, 0),
-                    widget.CPU(background=color_cpu, foreground=color_white),
-                    widget.ThermalSensor(background=color_cpu, foreground=color_white),
-                round_edges(color_cpu,1),
-                widget.TextBox(" ", width=3),
-                    round_edges(color_ram, 0),
-                    widget.Memory(
-                        background=color_ram,
-                        foreground=color_white,
-                        format='RAM {MemUsed:.1f}GB{MemTotal:.1f}GB',
-                        measure_mem='G',
-                    ),
-                    round_edges(color_ram, 1),
-                    widget.TextBox(" ", width=3),
-                    round_edges(color_net, 0),
-                    widget.Net(
-                        background=color_net,
-                        foreground=color_white,
-                        format='NET{up} ↑↓{down}',
-                        prefix='M',
-                    ),
-                    round_edges(color_net, 1),
-                    widget.Systray(padding=6),
-                    widget.Volume(volume_app='pavucontrol'),
-                    widget.Clock(format="%d-%m-%Y %H:%M "),
-                    widget.QuickExit(),
-                    widget.TextBox(" ", width=1),
+                widget.Systray(padding=6),
+                widget.Volume(volume_app='pavucontrol',padding=0),
+                get_border(2,color_cpu, color_background),
+                widget.CPU(
+                    background=color_cpu,
+                    foreground=color_white,
+                    format=' {freq_current}GHz {load_percent}%',
+                ),
+                widget.ThermalSensor(background=color_cpu, foreground=color_white),
+                get_border(1,color_ram, color_cpu),
+                widget.Memory(
+                    background=color_ram,
+                    foreground=color_white,
+                    format='{MemUsed:.1f}GB/{MemTotal:.1f}GB',
+                    measure_mem='G',
+                ),
+                get_border(1,color_net, color_ram),
+                widget.Net(
+                    background=color_net,
+                    foreground=color_white,
+                    format='{up} ↑↓{down}',
+                    prefix='M',
+                ),
+                get_border(1,color_background, color_net),
+                widget.Clock(format="%d-%m-%Y %H:%M "),
+                widget.TextBox(
+                    text="󰐥",
+                    fontsize=size_bar,
+                    mouse_callbacks={"Button1": lazy.spawn("rofi -show power-menu -modi power-menu:/home/alex/rofi-power-menu/rofi-power-menu")},
+                ),
+                widget.TextBox(" ", width=1),
                 ],
                 size_bar,
                 opacity=use_opacity,
