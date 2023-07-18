@@ -159,6 +159,7 @@ alias quick_charge_off="echo '\_SB.PCI0.LPC0.EC0.VPC0.SBMC 0x08' > /proc/acpi/ca
 
 alias suspend="systemctl suspend"
 alias shutdown="sudo shutdown now"
+alias hibernate="systemctl hibernate"
 
 #add-on screen
 alias hdmi-on="xrandr --output eDP --primary --mode 1920x1080 --pos 192x1080 --rotate normal --output HDMI-A-0 --mode 1920x1080 --pos 0x0 --rotate normal && feh --bg-scale .config/qtile/wallpaper.png DisplayPort-0"

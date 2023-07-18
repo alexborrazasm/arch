@@ -142,7 +142,7 @@ screens = [
                 ),
                 widget.WindowName(),
                 widget.Systray(padding=6),
-                widget.Volume(volume_app='pavucontrol',padding=0),
+                widget.PulseVolume(volume_app='pavucontrol',padding=0),
                 get_border(2,color_cpu, color_background),
                 widget.CPU(
                     background=color_cpu,
