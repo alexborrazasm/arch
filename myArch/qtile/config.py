@@ -11,7 +11,7 @@ color_background= "#1a1b26"
 color_unfocus= "#16161a"
 color_arch= "#1793d1"
 color_cpu= color_arch
-color_ram= "#420f3d"
+color_ram= color_background    #"#420f3d"
 color_net= "#22ab57"
 use_font= "Hack Nerd Font"
 use_opacity= 0.95
@@ -141,6 +141,7 @@ screens = [
                     highlight_method="line",
                     highlight_color=[color_background, color_background],
                     this_current_screen_border=color_arch,
+                    inactive="#696868",
                     visible_groups=["Net","Dev","Term","Med","Soc"],
                 ),
                 widget.WindowName(),
@@ -153,21 +154,21 @@ screens = [
                     format=' {freq_current}GHz {load_percent}%',
                 ),
                 widget.ThermalSensor(background=color_cpu, foreground=color_white),
-                get_border(1,color_ram, color_cpu),
+                get_border(2,color_ram, color_cpu),
                 widget.Memory(
                     background=color_ram,
                     foreground=color_white,
                     format='{MemUsed:.1f}GB/{MemTotal:.1f}GB',
                     measure_mem='G',
                 ),
-                get_border(1,color_net, color_ram),
+                get_border(2,color_net, color_ram),
                 widget.Net(
                     background=color_net,
                     foreground=color_white,
                     format='{up} ↑↓{down}',
                     prefix='M',
                 ),
-                get_border(1,color_background, color_net),
+                get_border(2,color_background, color_net),
                 widget.Clock(format="%d-%m-%Y %H:%M "),
                 widget.TextBox(" ", width=1),
                 ],

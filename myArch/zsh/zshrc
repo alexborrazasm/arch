@@ -141,7 +141,7 @@ alias matlab="matlab -nodesktop"
 alias maxima="rlwrap maxima"
 
 #qtile
-alias qtile_conf="cp -f Documents/Repos/arch/myArch/qtile/config.py .config/qtile && cp -f Documents/GitHUB/myArch/qtile/autostart.sh .config/qtile/"
+alias qtile_conf="cp -f Documents/Repos/arch/myArch/qtile/config.py .config/qtile && cp -f Documents/Repos/arch/myArch/qtile/autostart.sh .config/qtile/"
 alias qtile_reload="qtile cmd-obj -o cmd -f restart"
 alias qtile_check="qtile check"
 alias qtile_wall="feh --bg-fill "/home/BM4lex/.config/qtile/wallpaper.png""
@@ -175,3 +175,7 @@ alias screenshot="maim -s | xclip -selection clipboard -t image/png"
 
 #set up mouse and keyboard
 alias set_mouse_keyboard="xinput set-prop \"MSFT0004:00 06CB:CD98 Touchpad\" \"libinput Natural Scrolling Enabled\" 1 & xinput set-prop \"MSFT0004:00 06CB:CD98 Touchpad\" \"libinput Tapping Enabled\" 1 & setxkbmap es"
+
+#vpn
+alias vpn_on="wg-quick up myVPN"
+alias vpn_off="wg-quick down myVPN"
