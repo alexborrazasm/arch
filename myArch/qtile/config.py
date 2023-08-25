@@ -10,9 +10,9 @@ color_black= "#2e2929"
 color_background= "#1a1b26"
 color_unfocus= "#16161a"
 color_arch= "#1793d1"
-color_cpu= color_arch
-color_ram= color_background    #"#420f3d"
+color_layout= "#281138"
 color_net= "#22ab57"
+color_updates= "#420f3d"
 use_font= "Hack Nerd Font"
 use_opacity= 0.95
 size_bar= 26
@@ -145,32 +145,32 @@ screens = [
                     visible_groups=["Net","Dev","Term","Med","Soc"],
                 ),
                 widget.WindowName(),
-                widget.Systray(padding=6),
-                widget.Volume(volume_app='pavucontrol',padding=0),
-                get_border(2,color_cpu, color_background),
-                widget.CPU(
-                    background=color_cpu,
-                    foreground=color_white,
-                    format=' {freq_current}GHz {load_percent}%',
+                get_border(1, color_updates, color_background),
+                widget.CheckUpdates(
+                    background=color_updates,
+                    no_update_string='  0',
+                    display_format='  {updates}',
+                    update_interval=1800,
+                    custom_command='checkupdates',
                 ),
-                widget.ThermalSensor(background=color_cpu, foreground=color_white),
-                get_border(2,color_ram, color_cpu),
-                widget.Memory(
-                    background=color_ram,
-                    foreground=color_white,
-                    format='{MemUsed:.1f}GB/{MemTotal:.1f}GB',
-                    measure_mem='G',
-                ),
-                get_border(2,color_net, color_ram),
+                get_border(1, color_net, color_updates),
                 widget.Net(
                     background=color_net,
                     foreground=color_white,
-                    format='{up} ↑↓{down}',
+                    format='{down} ↓↑{up}',
                     prefix='M',
                 ),
-                get_border(2,color_background, color_net),
-                widget.Clock(format="%d-%m-%Y %H:%M "),
-                widget.TextBox(" ", width=1),
+                get_border(1, color_layout, color_net),
+                widget.CurrentLayout(background=color_layout),
+                get_border(1, color_arch, color_layout),
+                widget.Clock(
+                    format="%d/%m/%Y - %H:%M ",
+                    background = color_arch,
+                    ),
+                get_border(1, color_background, color_arch),
+                widget.Systray(),
+                widget.Volume(volume_app='pavucontrol',padding=0),
+                widget.TextBox(" ", width=8),
                 ],
                 size_bar,
                 opacity=use_opacity,
@@ -195,21 +195,21 @@ screens = [
                     visible_groups=["Net","Dev","Term","Med","Soc"],
                 ),
                 widget.WindowName(),
-                get_border(2,color_cpu, color_background),
+                get_border(2,color_arch, color_background),
                 widget.CPU(
-                    background=color_cpu,
+                    background=color_arch,
                     foreground=color_white,
                     format=' {freq_current}GHz {load_percent}%',
                 ),
-                widget.ThermalSensor(background=color_cpu, foreground=color_white),
-                get_border(1,color_ram, color_cpu),
+                widget.ThermalSensor(background=color_arch, foreground=color_white),
+                get_border(1,color_layout, color_arch),
                 widget.Memory(
-                    background=color_ram,
+                    background=color_layout,
                     foreground=color_white,
                     format='{MemUsed:.1f}GB/{MemTotal:.1f}GB',
                     measure_mem='G',
                 ),
-                get_border(1,color_net, color_ram),
+                get_border(1,color_net, color_layout),
                 widget.Net(
                     background=color_net,
                     foreground=color_white,
